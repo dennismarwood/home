@@ -16,8 +16,7 @@ if ON_PASS:
     print "wsgi.py detected PASS Environment ----------"
     x = os.path.abspath(os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'mysite'))
     sys.path.insert(1, x)
-
-os.environ.setdefault("DJANOG_SETTINGS_MODULE", "mysite.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
