@@ -10,20 +10,29 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import socket
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+ON_PASS = 'OPENSHIFT_REPO_DIR' in os.environ
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'e%2o$l@e$+83(q^2m-ktnua3kjtgzlxl==h^=0$crrcq6lru@p'
+if ON_PASS:
+    SECRET_KEY = os.environ['OPENSHIFT_SECRET_TOKEN']
+else:
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = 'e%2o$l@e$+83(q^2m-ktnua3kjtgzlxl==h^=0$crrcq6lru@p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = not ON_PASS
+DEBUG = DEBUG or 'DEBUG' in os.environ
+if ON_PASS and DEBUG:
+    print("*** Warning: Debug is enabled in production environment!!! ***")
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['OPENSHIFT_APP_DNS', socket.gethostname()] if ON_PASS else []
 
 
 # Application definition
@@ -63,6 +72,14 @@ DATABASES = {
     }
 }
 
+if ON_PASS:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(os.environ['OPENSHIFT_DATA_DIR'], 'db.sqlite3'),
+        }
+    }
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -81,3 +98,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'wsgi','static')
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(BASE_DIR,"static"),
+)
+TEMPLATE_DIRS = (
+    # Put strings here, like "/home/html/django_templates" or
+    # "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    #os.path.join(BASE_DIR, 'templates'),
+)
