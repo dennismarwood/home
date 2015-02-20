@@ -32,7 +32,9 @@ if ON_PASS and DEBUG:
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['OPENSHIFT_APP_DNS', socket.gethostname()] if ON_PASS else []
+
+ALLOWED_HOSTS =\
+    [os.environ['OPENSHIFT_APP_DNS'], socket.gethostname()] if ON_PASS else []
 
 
 # Application definition
@@ -98,7 +100,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'wsgi','static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'wsgi', 'static')
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -107,7 +109,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(BASE_DIR,"static"),
+    os.path.join(BASE_DIR, "static"),
 )
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or
