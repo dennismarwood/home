@@ -99,8 +99,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
+#This url is to be a reference for STATIC_ROOT
 STATIC_URL = '/static/'
+print "STATIC_URL:", STATIC_URL
+
+#Destination for copied files / apache pool
 STATIC_ROOT = os.path.join(BASE_DIR, 'wsgi', 'static')
+print "STATIC_ROOT:", STATIC_ROOT
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
@@ -109,8 +115,13 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    #These paths are used in addation to 'static/' app sub-directories
     os.path.join(BASE_DIR, "static"),
 )
+print "STATICFILES_DIRS: "
+for x in STATICFILES_DIRS:
+    print x
+
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or
     # "C:/www/django/templates".
@@ -118,5 +129,3 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     #os.path.join(BASE_DIR, 'templates'),
 )
-print "static dir: "
-print os.path.join(BASE_DIR, "static")
