@@ -101,11 +101,11 @@ USE_TZ = True
 
 #This url is to be a reference for STATIC_ROOT
 STATIC_URL = '/static/'
-print "STATIC_URL:", os.abspath(STATIC_URL)
+print "STATIC_URL:", os.path.abspath(STATIC_URL)
 
 #Destination for copied files / apache pool
 STATIC_ROOT = os.path.join(BASE_DIR, 'wsgi', 'static')
-print "STATIC_ROOT:", os.abspath(STATIC_ROOT)
+print "STATIC_ROOT:", os.path.abspath(STATIC_ROOT)
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -120,7 +120,7 @@ STATICFILES_DIRS = (
 )
 print "STATICFILES_DIRS: "
 for x in STATICFILES_DIRS:
-    print os.abspath(x)
+    print os.path.abspath(x)
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or
