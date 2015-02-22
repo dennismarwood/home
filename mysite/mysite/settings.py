@@ -105,7 +105,7 @@ STATIC_URL = '/static/'
 print "STATIC_URL:", os.path.abspath(STATIC_URL)
 
 #Destination for copied files / apache pool
-STATIC_ROOT = os.path.join(BASE_DIR, 'wsgi', 'static')
+STATIC_ROOT = os.path.join(BASE_DIR,'..', 'wsgi', 'static')
 print "STATIC_ROOT:", os.path.abspath(STATIC_ROOT)
 
 STATICFILES_FINDERS = (
