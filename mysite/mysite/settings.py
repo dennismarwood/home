@@ -116,7 +116,7 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     #These paths are used in addation to 'static/' app sub-directories
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "..", "static"),
 )
 print "STATICFILES_DIRS: "
 for x in STATICFILES_DIRS:
