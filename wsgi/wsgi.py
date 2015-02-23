@@ -14,7 +14,7 @@ import sys
 ON_PASS = 'OPENSHIFT_REPO_DIR' in os.environ
 if ON_PASS:
     print "wsgi.py detected PASS Environment ----------"
-    x = os.path.abspath(os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'mysite'))
+    x = os.path.abspath(os.path.join(os.environ['OPENSHIFT_REPO_DIR']))
     sys.path.insert(1, x)
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 
