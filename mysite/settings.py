@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 import socket
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+print "BASE_DIR", os.path.dirname(os.path.dirname(__file__))
 
 ON_PASS = 'OPENSHIFT_REPO_DIR' in os.environ
 
@@ -102,7 +103,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 #Destination for copied files / apache pool
-STATIC_ROOT = os.path.join(BASE_DIR,'..', 'wsgi', 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, '..', 'wsgi', 'static')
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
