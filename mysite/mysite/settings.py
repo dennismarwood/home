@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 import socket
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-print "BASE_DIR", os.path.dirname(os.path.dirname(__file__))
 
 ON_PASS = 'OPENSHIFT_REPO_DIR' in os.environ
 
@@ -96,17 +95,14 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 #This url is to be a reference for STATIC_ROOT
 STATIC_URL = '/static/'
-print "STATIC_URL:", os.path.abspath(STATIC_URL)
 
 #Destination for copied files / apache pool
 STATIC_ROOT = os.path.join(BASE_DIR,'..', 'wsgi', 'static')
-print "STATIC_ROOT:", os.path.abspath(STATIC_ROOT)
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -119,9 +115,6 @@ STATICFILES_DIRS = (
     #These paths are used in addation to 'static/' app sub-directories
     os.path.join(BASE_DIR, "static"),
 )
-print "STATICFILES_DIRS: "
-for x in STATICFILES_DIRS:
-    print os.path.abspath(x)
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or
